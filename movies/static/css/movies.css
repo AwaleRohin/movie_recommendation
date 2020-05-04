@@ -1,0 +1,11 @@
+.movies {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.message {
+  margin: 10px;
+  text-align: center;
+}

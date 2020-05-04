@@ -1,0 +1,22 @@
+{% extends "movieUi.html" %}
+
+
+{% block main-content %}
+<div class="message">
+    <b>{{message}}</b>
+</div>
+
+<div class="movies">
+    {% for movie in result %}
+    <div class="card mt-3" style="width: 18rem;">
+        <div>
+            <img class="card-img-top" src="{{movie.Search.0.Poster}}" alt="{{movie.Search.0.Title}}" />
+            <div class="card-body text-center">
+                <h4 class="card-title">{{movie.Search.0.Title}}</h4>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
