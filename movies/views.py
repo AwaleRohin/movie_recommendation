@@ -21,4 +21,4 @@ def serach_movie(request):
         response = requests.get(url.format(movie,credentials['api_key']))
         if not 'Error' in response.text:
             result.append(json.loads(response.text))
-    return render(request, 'similar_movie.html',{'result':result}) 
+    return render(request, 'similar_movie.html',{'result':result, 'search':request.GET.get('search').capitalize()}) 

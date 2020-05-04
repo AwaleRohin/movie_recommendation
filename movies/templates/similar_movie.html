@@ -3,7 +3,12 @@
 
 {% block main-content %}
 <div class="message">
-    <b>{{message}}</b>
+    {% if message %}
+        <b>{{message}}</b>
+    {% else %}
+        <b>You searched for {{search}}</b><br/>
+        <span class="text-muted">Here are some of the similar movies according to cosine similarity</span>
+    {% endif %}
 </div>
 
 <div class="movies">

@@ -11,6 +11,7 @@ def get_index_from_title(title, df):
 	try:
 		return df[df.title == title]["index"].values[0]
 	except Exception as e:
+		print(e)
 		return False 
 
 
