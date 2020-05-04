@@ -3,7 +3,6 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-
 def get_title_from_index(index, df):
 	return df[df.index == index]["title"].values[0].capitalize()
 
@@ -22,21 +21,20 @@ def combine_features(row):
 		print("Error:", row)
 
 
-def read_dataset():
-	df = pd.read_csv("movies/common/movie_dataset.csv", engine='python')
-	features = ['keywords','cast','genres','director']
-	for feature in features:
-		df[feature] = df[feature].fillna('')
-	df["combined_features"] = df.apply(combine_features,axis=1)
 
-	cv = CountVectorizer()
-	count_matrix = cv.fit_transform(df["combined_features"])
-	cosine_sim = cosine_similarity(count_matrix) 
-	return cosine_sim, df
+df = pd.read_csv("movies/common/movie_dataset.csv", engine='python')
+features = ['keywords','cast','genres','director']
+for feature in features:
+	df[feature] = df[feature].fillna('')
+df["combined_features"] = df.apply(combine_features,axis=1)
+
+cv = CountVectorizer()
+count_matrix = cv.fit_transform(df["combined_features"])
+cosine_sim = cosine_similarity(count_matrix) 
+
 
 
 def movie_recommendation(movie='avatar'):
-	cosine_sim, df = read_dataset()
 	movie_user_likes =  movie
 	movie_index = get_index_from_title(movie_user_likes, df)
 	if not movie_index:

@@ -25,4 +25,4 @@ urlpatterns = [
 
 from movies.common import movie_recommedation as movie_recommedation
 
-movie_recommedation.movie_recommendation()
+movie_recommedation
