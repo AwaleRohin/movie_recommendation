@@ -3,8 +3,11 @@ from movies.common import movie_recommedation as movie_recommedation
 import requests
 import json
 import yaml
+import redis
+import ast
 
 # Create your views here.
+redis = redis.Redis(host='localhost', port=6379, db=0)
 
 def homepage(request):
     return render(request, 'movieUi.html')
@@ -18,7 +21,13 @@ def serach_movie(request):
         return render(request, 'similar_movie.html',{'result':result, 'message':'Sorry couldnt get the result for this movies.'}) 
     url ='http://www.omdbapi.com/?s={}&type=movie&apikey={}'
     for movie in simliar_movies:
-        response = requests.get(url.format(movie,credentials['api_key']))
-        if not 'Error' in response.text:
-            result.append(json.loads(response.text))
+        cached_movie = redis.get(movie)
+        if not cached_movie:
+            response = requests.get(url.format(movie,credentials['api_key']))
+            if not 'Error' in response.text:
+                redis.setex(movie, 3060, str(response.text))
+                result.append(json.loads(response.text))
+        else:
+            json_data = ast.literal_eval(str(cached_movie, 'utf-8'))
+            result.append(json_data)
     return render(request, 'similar_movie.html',{'result':result, 'search':request.GET.get('search').capitalize()}) 
