@@ -13,7 +13,7 @@ def homepage(request):
     return render(request, 'movieUi.html')
 
 
-def serach_movie(request):
+def search_movie(request):
     result = []
     credentials = yaml.load(open('credentials.yaml'), Loader=yaml.FullLoader)
     simliar_movies = movie_recommedation.movie_recommendation(request.GET.get('search'))
