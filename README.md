@@ -1,7 +1,7 @@
 ### Simple movie recommendation engine created using cosine similarity
 
 ### Steps to run project
-- First make sure you have `python` install along with `pip` and `virtualenv`. Usually pip is installed along python and to install virtualenv: pip install virtualenv
+- First make sure you have `python` installed along with `pip` and `virtualenv`. Usually pip is installed along python and to install virtualenv: pip install virtualenv
 - Also make sure you have installed redis: for ubuntu `sudo apt install redis-server` and for windows [check out this article](`https://redislabs.com/blog/redis-on-windows-10/`)
 - Clone the repo
 - Create virtualenv: `virtualenv venv` or `virtualenv -p python3 venv`
